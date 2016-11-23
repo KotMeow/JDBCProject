@@ -18,6 +18,9 @@ public class MovieManagerTest {
 	private final static int RELEASE_1 = 2010;
 	private final static String GENRE_1 = "Drama";
 	private final static boolean ISFAVORITE_1 = false;
+
+	private final static String NAME_1 = "Leonardo DiCaprio";
+	private final static int ROLE_1 = "Bear";
 	
 	@Test
 	public void checkConnection(){
@@ -26,24 +29,44 @@ public class MovieManagerTest {
 	
 	@Test
 	public void checkAdding(){
-		
+
+		System.out.println("######### ADDING TEST START #########\n");
+
 		Movie movie = new Movie(TITLE_1, RELEASE_1, GENRE_1, ISFAVORITE_1);
-		
 		moviesManager.clearMovies();
 		assertEquals(1,moviesManager.addMovie(movie));
+
 		System.out.println("Movie " + movie.getTitle() + " has been added to database.");
+
 		List<Movie> movies = moviesManager.getAllMovies();
 		Movie movieRetrived = movies.get(0);
-		
+
 		assertEquals(TITLE_1, movieRetrived.getTitle());
 		assertEquals(RELEASE_1, movieRetrived.getReleaseYear());
 		assertEquals(GENRE_1, movieRetrived.getGenre());
 		assertEquals(ISFAVORITE_1, movieRetrived.getIsFavorite());
 		System.out.println("Retrived movie from db id: " + movieRetrived.getId() + " is valid.");
+		System.out.println("######### ADDING TEST FINISH #########\n");
+	}
+
+	@Test
+	public void checkActorAdding(){
+
+		System.out.println("######### ACTOR ADDING TEST START #########\n");
+		int movieid = moviesManager.getAllMovies().get(0).getId();
+		Actor actor = new Actor(NAME_1,ROLE_1);
+		assertEquals(1,moviesManager.addActor(movieid,actor));
+
+		System.out.println("Actor " + actor.getName() + " has been added to database.");
+
+
+		System.out.println("Retrived movie from db id: " + movieRetrived.getId() + " is valid.");
+		System.out.println("######### ACTOR ADDING TEST FINISH #########\n");
 	}
 	@Test
 	public void checkUpdate()
 	{
+		System.out.println("######### UPDATE TEST START #########\n");
 		List<Movie> movies = moviesManager.getAllMovies();
 		Movie movie = movies.get(0);
 
@@ -58,15 +81,18 @@ public class MovieManagerTest {
 		System.out.println("Movie after update: " + movie.getId() + " " + movie.getTitle() + " " + movie.getIsFavorite() + ".");
 		assertEquals(newTitle, movie.getTitle());
 		assertEquals(newisFavorite, movie.getIsFavorite());
+		System.out.println("######### ADDING TEST FINISH #########\n");
 	}
 
 	@Test
 	public void checkDelete()
 	{
+		System.out.println("######### DELETE TEST START #########\n");
 		List<Movie> movies = moviesManager.getAllMovies();
 		Movie movieRetrived = movies.get(0);
 		assertEquals(1, moviesManager.deleteMovie(movieRetrived.getId()));
 		System.out.println("Movie: " + movieRetrived.getId() + " " + movieRetrived.getTitle() + " has been deleted.");
+		System.out.println("######### DELETE TEST FINISH #########\n");
 	}
 
 }
