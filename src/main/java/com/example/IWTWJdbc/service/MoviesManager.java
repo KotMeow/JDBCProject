@@ -36,6 +36,8 @@ public class MoviesManager {
 	private PreparedStatement updateActorStmt;
 	private PreparedStatement getMovieActorsStmt;
 
+	private PreparedStatement deleteActorFromMovieStmt;
+
 	private Statement statement;
 
 	public MoviesManager() {
@@ -89,6 +91,9 @@ public class MoviesManager {
 					.prepareStatement("INSERT INTO Actor (name, role, movieId) VALUES (?, ?, ?)");
 			getMovieActorsStmt = connection
 					.prepareStatement("SELECT * FROM Actor JOIN Movie ON (Actor.movieID = Movie.id) WHERE Movie.id = ?");
+			deleteActorFromMovieStmt = connection
+					.prepareStatement("UPDATE Actor SET movieId = null WHERE id = ?");
+
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -163,6 +168,18 @@ public class MoviesManager {
 		try {
 			deleteActorStmt.setInt(1, id);
 			count = deleteActorStmt.executeUpdate();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+	public int deleteActorFromMovie(int id) {
+		int count = 0;
+		try {
+			deleteActorFromMovieStmt.setInt(1, id);
+			count = deleteActorFromMovieStmt.executeUpdate();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();

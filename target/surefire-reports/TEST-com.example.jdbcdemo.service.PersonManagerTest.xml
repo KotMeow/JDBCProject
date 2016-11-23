@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.001" errors="0" skipped="0" tests="2" name="com.example.jdbcdemo.service.PersonManagerTest">
+<testsuite failures="0" time="0.002" errors="0" skipped="0" tests="2" name="com.example.jdbcdemo.service.PersonManagerTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/opt/devel/jdk1.7.0_40/jre/lib/i386"/>
@@ -60,5 +60,5 @@
     <property name="sun.cpu.isalist" value=""/>
   </properties>
   <testcase time="0" classname="com.example.jdbcdemo.service.PersonManagerTest" name="checkConnection"/>
-  <testcase time="0.001" classname="com.example.jdbcdemo.service.PersonManagerTest" name="checkAdding"/>
+  <testcase time="0.002" classname="com.example.jdbcdemo.service.PersonManagerTest" name="checkAdding"/>
 </testsuite>

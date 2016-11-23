@@ -64,7 +64,7 @@ public class MovieManagerTest {
 		System.out.println("######### ACTOR ADDING TEST START #########\n");
 		int movieid = moviesManager.getAllMovies().get(0).getId();
 		Actor actor = new Actor(NAME_1,ROLE_1);
-		Actor actor1 = new Actor("Kot","ROLE_1");
+		Actor actor1 = new Actor("Kot","Lew");
 		moviesManager.addActor(movieid,actor1);
 		assertEquals(1,moviesManager.addActor(movieid,actor));
 		System.out.println("Actor " + actor.getName() + " has been added to database.");
@@ -105,12 +105,12 @@ public class MovieManagerTest {
 		String newName = "Kamil Kot";
 		String newRole = "James Bond";
 
-		System.out.println("Actor before update: " + actor.getId() + " " + actor.getName() + " "  + actor.getRole() + ".");
+		System.out.println("Actor before update: " + actor.getId() + " " + actor.getName() + " as "  + actor.getRole() + ".");
 
 		moviesManager.updateActor(actor.getId(), newName, newRole);
 		actors = moviesManager.getAllActors();
 		actor = actors.get(moviesManager.getAllActors().size()-1);
-		System.out.println("Actor after update: " + actor.getId() + " " + actor.getName() + " "  + actor.getRole() + ".");
+		System.out.println("Actor after update: " + actor.getId() + " " + actor.getName() + " as "  + actor.getRole() + ".");
 		assertEquals(newName, actor.getName());
 		assertEquals(newRole, actor.getRole());
 		System.out.println("######### UPDATE ACTOR TEST FINISH #########\n");
@@ -125,9 +125,19 @@ public class MovieManagerTest {
     	List<Actor> actors = moviesManager.getAllMovieActors(movie.getId());
     	System.out.println("Actors of " + movie.getTitle() + ":\n");
 		for (Actor actor : actors) {
-			System.out.println(actor.getId() + " " + actor.getName() + " " + actor.getRole() + ".\n");
+			System.out.println(actor.getId() + " " + actor.getName() + " as " + actor.getRole() + ".\n");
 		}
 		System.out.println("######### ACTOR FROM MOVIE TEST FINISH #########\n");
+	}
+
+	@Test
+	public void checkActorFromMovieDelete(){
+		System.out.println("######### DELETE ACTOR FROM MOVIE TEST START #########\n");
+		List<Actor> actors = moviesManager.getAllActors();
+		Actor actorRetrived = actors.get(moviesManager.getAllActors().size()-1);
+		assertEquals(1, moviesManager.deleteActorFromMovie(actorRetrived.getId()));
+		System.out.println("Actor: " + actorRetrived.getId() + " has been deleted from movie.");
+		System.out.println("######### DELETE ACTOR FROM MOVIE TEST FINISH #########\n");
 	}
 	@Test
 	public void checkActorDelete(){
