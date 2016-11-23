@@ -84,7 +84,27 @@ public class MovieManagerTest {
 		System.out.println("Movie after update: " + movie.getId() + " " + movie.getTitle() + " " + movie.getIsFavorite() + ".");
 		assertEquals(newTitle, movie.getTitle());
 		assertEquals(newisFavorite, movie.getIsFavorite());
-		System.out.println("######### ADDING TEST FINISH #########\n");
+		System.out.println("######### UPDATE TEST FINISH #########\n");
+	}
+	@Test
+	public void checkActorUpdate()
+	{
+		System.out.println("######### UPDATE ACTOR TEST START #########\n");
+		List<Actor> actors = moviesManager.getAllActors();
+		Actor actor = actors.get(0);
+
+		String newName = "Kamil Kot";
+		String newRole = "James Bond";
+
+		System.out.println("Actor before update: " + actor.getId() + " " + actor.getName() + " "  + actor.getRole() + ".");
+
+		moviesManager.updateActor(actor.getId(), newName, newRole);
+		actors = moviesManager.getAllActors();
+		actor = actors.get(0);
+		System.out.println("Actor after update: " + actor.getId() + " " + actor.getName() + " "  + actor.getRole() + ".");
+		assertEquals(newName, actor.getName());
+		assertEquals(newRole, actor.getRole());
+		System.out.println("######### UPDATE ACTOR TEST FINISH #########\n");
 	}
 
 	@Test

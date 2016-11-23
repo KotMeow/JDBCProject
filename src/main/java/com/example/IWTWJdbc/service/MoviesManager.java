@@ -33,6 +33,7 @@ public class MoviesManager {
 	private PreparedStatement deleteAllActorsStmt;
 	private PreparedStatement deleteActorStmt;
 	private PreparedStatement getAllActorsStmt;
+	private PreparedStatement updateActorStmt;
 
 	private Statement statement;
 
@@ -81,6 +82,8 @@ public class MoviesManager {
 					.prepareStatement("DELETE FROM Actor WHERE id = ?");
 			updateMovieStmt = connection
 					.prepareStatement("UPDATE Movie SET title=?, releaseYear=?, genre = ?, isFavorite = ? WHERE id =?");
+			updateActorStmt = connection
+					.prepareStatement("UPDATE Actor SET name=?, role=? WHERE id =?");
 			addActorStmt = connection
 					.prepareStatement("INSERT INTO Actor (name, role, movie_id) VALUES (?, ?, ?)");
 
@@ -173,6 +176,18 @@ public class MoviesManager {
 			updateMovieStmt.setInt(5, movie_id);
 
 			updateMovieStmt.executeUpdate();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void updateActor(int actor_id, String name, String role){
+		try {
+			updateActorStmt.setString(1,name);
+			updateActorStmt.setString(2,role);
+			updateActorStmt.setInt(3, actor_id);
+			updateActorStmt.executeUpdate();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
