@@ -12,6 +12,10 @@ public class Actor {
         this.role = role;
     }
 
+    public Actor() {
+        super();
+    }
+
     public int getId() {
 		return id;
 	}
